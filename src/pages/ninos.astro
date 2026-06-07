@@ -1,0 +1,224 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Niños">
+  <section class="hero-ninos">
+    <div class="container">
+      <h1>🧸 Colección Niños</h1>
+      <p>¡Colores y diversión para los pequeños!</p>
+    </div>
+  </section>
+
+  <section class="container section">
+    <div class="products-grid">
+      <!-- Producto 1 -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1514989940723-e8e51635b782?w=400" alt="Zapatilla Niños">
+        <div class="product-info">
+          <h3>Kids Color Blast</h3>
+          <p class="price">$120.000 COP</p>
+          <div class="selectors">
+            <select id="size1">
+              <option value="">Talla</option>
+              <option>28</option>
+              <option>29</option>
+              <option>30</option>
+              <option>31</option>
+              <option>32</option>
+            </select>
+            <select id="color1">
+              <option value="">Color</option>
+              <option>Azul/Verde</option>
+              <option>Rosa/Amarillo</option>
+            </select>
+          </div>
+          <button onclick="pedirWhatsApp('Kids Color Blast', 'Niños', 1)" class="btn-whatsapp">
+            📲 Pedir por WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- Producto 2 -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1503919545889-aef6d2040520?w=400" alt="Zapatilla Niños 2">
+        <div class="product-info">
+          <h3>Super Runner Kids</h3>
+          <p class="price">$135.000 COP</p>
+          <div class="selectors">
+            <select id="size2">
+              <option value="">Talla</option>
+              <option>28</option>
+              <option>29</option>
+              <option>30</option>
+              <option>31</option>
+              <option>32</option>
+              <option>33</option>
+            </select>
+            <select id="color2">
+              <option value="">Color</option>
+              <option>Naranja/Azul</option>
+              <option>Rojo/Negro</option>
+            </select>
+          </div>
+          <button onclick="pedirWhatsApp('Super Runner Kids', 'Niños', 2)" class="btn-whatsapp">
+            📲 Pedir por WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- Producto 3 -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1560769629-975ec9f6b313?w=400" alt="Zapatilla Niños 3">
+        <div class="product-info">
+          <h3>Mini Sport Stars</h3>
+          <p class="price">$125.000 COP</p>
+          <div class="selectors">
+            <select id="size3">
+              <option value="">Talla</option>
+              <option>28</option>
+              <option>29</option>
+              <option>30</option>
+              <option>31</option>
+              <option>32</option>
+            </select>
+            <select id="color3">
+              <option value="">Color</option>
+              <option>Multicolor</option>
+              <option>Verde/Amarillo</option>
+            </select>
+          </div>
+          <button onclick="pedirWhatsApp('Mini Sport Stars', 'Niños', 3)" class="btn-whatsapp">
+            📲 Pedir por WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function pedirWhatsApp(modelo, categoria, num) {
+      const talla = document.getElementById('size' + num).value;
+      const color = document.getElementById('color' + num).value;
+      
+      if (!talla || !color) {
+        alert('Por favor selecciona talla y color');
+        return;
+      }
+      
+      const nombre = prompt('¿Cómo te llamas?') || 'Cliente';
+      const ciudad = prompt('¿Ciudad de envío?') || 'Cali';
+      
+      const mensaje = `Hola CLAR´SHOES! 👟%0A%0AQuiero pedir:%0A🔹 Modelo: ${modelo}%0A🔹 Categoría: ${categoria}%0A🔹 Talla: ${talla}%0A🔹 Color: ${color}%0A%0A👤 Nombre: ${nombre}%0A📍 Ciudad: ${ciudad}%0A%0A¿Está disponible?`;
+      
+      window.open(`https://wa.me/573023582779?text=${mensaje}`, '_blank');
+    }
+  </script>
+</Layout>
+
+<style>
+  .hero-ninos {
+    background: linear-gradient(rgba(255,215,0,0.8), rgba(255,165,0,0.8)),
+                url('https://images.unsplash.com/photo-1503919545889-aef6d2040520?w=1200');
+    background-size: cover;
+    background-position: center;
+    color: #FF6B35;
+    text-align: center;
+    padding: 4rem 1rem;
+  }
+  
+  .hero-ninos h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+  }
+  
+  .section {
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #FFF9E6 0%, #FFE4CC 100%);
+    min-height: 100vh;
+  }
+  
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .product-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(255,165,0,0.2);
+    transition: transform 0.2s;
+    border: 3px solid #FFD700;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-8px) rotate(1deg);
+    box-shadow: 0 12px 28px rgba(255,165,0,0.3);
+  }
+  
+  .product-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+  }
+  
+  .product-info {
+    padding: 1.5rem;
+  }
+  
+  .product-info h3 {
+    color: #FF6B35;
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .price {
+    font-weight: 700;
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .selectors {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .selectors select {
+    flex: 1;
+    padding: 0.6rem;
+    border: 2px solid #FFD700;
+    border-radius: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .btn-whatsapp {
+    width: 100%;
+    padding: 0.8rem;
+    background: #FF9F43;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 1rem;
+  }
+  
+  .btn-whatsapp:hover {
+    background: #FF6B35;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>

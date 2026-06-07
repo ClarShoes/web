@@ -1,0 +1,110 @@
+---
+---
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">CLAR<span>&apos;</span>SHOES</div>
+      <p>Zapatillas importadas Triple A.<br/>Cali, Colombia. Envios a todo el pais.</p>
+    </div>
+
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Paginas</h4>
+        <a href="/">Inicio</a>
+        <a href="/catalogo">Catalogo</a>
+        <a href="/contacto">Contacto</a>
+      </div>
+      <div class="footer-col">
+        <h4>Siguenos</h4>
+        <a href="https://instagram.com/clars_shoes" target="_blank">Instagram</a>
+        <a href="https://tiktok.com/@clars_shoes" target="_blank">TikTok</a>
+        <a href="https://wa.me/573023582779" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2025 Clar&apos;Shoes · Cali, Colombia</span>
+    <span>Hecho con ❤️ para los amantes del estilo</span>
+  </div>
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid var(--borde);
+    margin-top: 4rem;
+  }
+
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 3rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-logo span { color: var(--acento); }
+
+  .footer-brand p {
+    color: var(--gris);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    max-width: 280px;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 3rem;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .footer-col h4 {
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--acento);
+    margin-bottom: 0.3rem;
+  }
+
+  .footer-col a {
+    font-size: 0.85rem;
+    color: var(--gris);
+    transition: color 0.2s;
+  }
+
+  .footer-col a:hover { color: var(--blanco); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--borde);
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-size: 0.72rem;
+    color: var(--gris);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .footer-top { flex-direction: column; }
+    .footer-bottom { justify-content: center; text-align: center; }
+  }
+</style>
