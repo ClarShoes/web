@@ -1,42 +1,155 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import ProductCard from '../components/ProductCard.astro';
+
+// AQUI AGREGAS TUS PRODUCTOS
+// Para agregar uno nuevo, copia un bloque { } y pegalo al final antes del ];
+// Recuerda subir la foto a public/images/ con el mismo nombre exacto
+const productos = [
+  { imagen: "/images/NEW-BALANCE-9060-X1.avif", alt: "New Balance 9060", nombre: "New Balance 9060", precio: "XXX.000", categoria: "Unisex" },
+  { imagen: "/images/Nike_Air_Max_BW.avif", alt: "Nike Air Max BW", nombre: "Nike Air Max BW", precio: "XXX.000", categoria: "Unisex", badge: "NUEVO" },
+  { imagen: "/images/nike_air_max_plus_tn-x.avif", alt: "Nike Air Max Plus TN", nombre: "Nike Air Max Plus TN", precio: "XXX.000", categoria: "Hombre" },
+  { imagen: "/images/nike_cortez.png", alt: "Nike Cortez", nombre: "Nike Cortez", precio: "XXX.000", categoria: "Mujer" },
+  { imagen: "/images/nike_free.png", alt: "Nike Free", nombre: "Nike Free", precio: "XXX.000", categoria: "Unisex" },
+  { imagen: "/images/ON-CLOUD-RUNNING-X1.avif", alt: "On Cloud Running", nombre: "On Cloud Running", precio: "XXX.000", categoria: "Unisex", badge: "NUEVO" },
+  { imagen: "/images/ZOOM-X1.png", alt: "Nike Zoom X", nombre: "Nike Zoom X", precio: "XXX.000", categoria: "Hombre" },
+];
+
+const categorias = ["Todos", "Hombre", "Mujer", "Nino", "Unisex"];
 ---
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&amp;display=swap" rel="stylesheet" />
-    <title>Clar&apos;Shoes | Zapatillas Importadas Triple A</title>
-    <meta name="description" content="Zapatillas importadas Triple A en Cali, Colombia. Envios a todo el pais." />
-  </head>
-  <body>
-    <slot />
-  </body>
-</html>
 
-<style is:global>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+<Layout>
+  <Navbar />
 
-  :root {
-    --negro: #080808;
-    --blanco: #F2EFE9;
-    --acento: #D4F240;
-    --gris: #666;
-    --gris2: #1a1a1a;
-    --borde: #222;
+  <main class="catalogo">
+    <div class="catalogo-header">
+      <h1 class="catalogo-titulo">CATALOGO</h1>
+      <p class="catalogo-sub">{productos.length} modelos disponibles</p>
+    </div>
+
+    <!-- FILTROS -->
+    <div class="filtros">
+      {categorias.map(cat => (
+        <button class={`filtro-btn ${cat === 'Todos' ? 'activo' : ''}`} data-cat={cat}>
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- GRID DE PRODUCTOS -->
+    <div class="productos-grid" id="productosGrid">
+      {productos.map(p => (
+        <div class="producto-wrapper" data-categoria={p.categoria}>
+          <ProductCard
+            imagen={p.imagen}
+            alt={p.alt}
+            nombre={p.nombre}
+            precio={p.precio}
+            categoria={p.categoria}
+            badge={p.badge}
+          />
+        </div>
+      ))}
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .catalogo {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
   }
 
-  body {
-    background: var(--negro);
-    color: var(--blanco);
-    font-family: 'DM Sans', sans-serif;
-    overflow-x: hidden;
+  .catalogo-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--borde);
   }
 
-  img { max-width: 100%; display: block; }
-  a { text-decoration: none; color: inherit; }
-  button { cursor: pointer; font-family: inherit; border: none; }
+  .catalogo-titulo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 4rem;
+    letter-spacing: 4px;
+    line-height: 1;
+  }
+
+  .catalogo-sub {
+    color: var(--gris);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+  }
+
+  .filtros {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filtro-btn {
+    background: transparent;
+    color: var(--gris);
+    border: 1px solid var(--borde);
+    padding: 0.5rem 1.2rem;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .filtro-btn:hover, .filtro-btn.activo {
+    background: var(--acento);
+    color: var(--negro);
+    border-color: var(--acento);
+  }
+
+  .productos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .producto-wrapper.oculto { display: none; }
+
+  @media (max-width: 900px) {
+    .productos-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 600px) {
+    .catalogo-titulo { font-size: 2.5rem; }
+    .productos-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+  }
 </style>
+
+<script>
+  // Logica de filtros - esto hace que los botones funcionen
+  const btns = document.querySelectorAll('.filtro-btn');
+  const productos = document.querySelectorAll('.producto-wrapper');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Quitar activo de todos
+      btns.forEach(b => b.classList.remove('activo'));
+      btn.classList.add('activo');
+
+      const cat = btn.getAttribute('data-cat');
+
+      productos.forEach(p => {
+        if (cat === 'Todos' || p.getAttribute('data-categoria') === cat) {
+          p.classList.remove('oculto');
+        } else {
+          p.classList.add('oculto');
+        }
+      });
+    });
+  });
+</script>
