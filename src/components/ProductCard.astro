@@ -15,7 +15,7 @@ const mensaje = encodeURIComponent(`Hola! Me interesa el modelo ${nombre}, preci
 const waLink = href || `https://wa.me/573023582779?text=${mensaje}`;
 ---
 
-<div class="card">
+<a class="card" href={href || '#'}>
   <div class="card-img">
     <img src={imagen} alt={alt} loading="lazy" />
     {badge && <span class="badge">{badge}</span>}
@@ -33,7 +33,7 @@ const waLink = href || `https://wa.me/573023582779?text=${mensaje}`;
     <h3 class="card-nombre">{nombre}</h3>
     <div class="card-precio">${precio}</div>
   </div>
-</div>
+</a>
 
 <style>
   .card {
