@@ -1,0 +1,385 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+const colores = [
+  { id: 1, imagen: "/images/NEW BALANCE 9060 IA 1.jpeg", nombre: "Beige" },
+  { id: 2, imagen: "/images/NEW BALANCE 9060 IA 2.jpeg", nombre: "Verde Oliva" },
+  { id: 3, imagen: "/images/NEW BALANCE 9060 IA 3.jpeg", nombre: "Blanco Morado" },
+  { id: 4, imagen: "/images/NEW BALANCE 9060 IA 4.jpeg", nombre: "Negro" },
+  { id: 5, imagen: "/images/NEW BALANCE 9060 IA 5.jpeg", nombre: "Negro Cafe" },
+  { id: 6, imagen: "/images/NEW BALANCE 9060 IA 6.jpeg", nombre: "Gris Amarillo" },
+];
+
+const tallasHombre = [37, 38, 39, 40, 41, 42];
+const tallasMujer = [35, 36, 37, 38];
+---
+
+<Layout>
+  <Navbar />
+
+  <main class="producto">
+    <div class="producto-grid">
+
+      <!-- FOTO -->
+      <div class="producto-fotos">
+        <div class="foto-principal">
+          <img id="fotoPrincipal" src={colores[0].imagen} alt="New Balance 9060" />
+        </div>
+        <div class="miniaturas">
+          {colores.map((color) => (
+            <button 
+              class={`miniatura ${color.id === 1 ? 'activa' : ''}`}
+              data-imagen={color.imagen}
+              data-color={color.nombre}
+              onclick="cambiarColor(this)"
+            >
+              <img src={color.imagen} alt={color.nombre} />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div class="producto-info">
+        <p class="producto-marca">NEW BALANCE</p>
+        <h1 class="producto-nombre">9060</h1>
+        <p class="producto-precio">$XXX.000</p>
+
+        <div class="producto-color">
+          <p class="label">Color: <span id="colorActual">Beige</span></p>
+        </div>
+
+        <!-- SELECTOR GENERO -->
+        <div class="selector-grupo">
+          <p class="label">Genero:</p>
+          <div class="selector-btns">
+            <button class="selector-btn activo" onclick="cambiarGenero('mujer', this)">Mujer</button>
+            <button class="selector-btn" onclick="cambiarGenero('hombre', this)">Hombre</button>
+          </div>
+        </div>
+
+        <!-- TALLAS -->
+        <div class="selector-grupo">
+          <p class="label">Talla:</p>
+          <div class="tallas-grid" id="tallasGrid">
+            {tallasMujer.map(talla => (
+              <button class="talla-btn" onclick="elegirTalla(this)">{talla}</button>
+            ))}
+          </div>
+        </div>
+
+        <!-- BOTON WHATSAPP -->
+        <a id="btnWhatsapp" href="#" target="_blank" class="btn-whatsapp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Pedir por WhatsApp
+        </a>
+
+        <p class="nota">Selecciona genero y talla para continuar</p>
+
+        <div class="envio-info">
+          <div class="envio-item">📦 Envios a todo Colombia</div>
+          <div class="envio-item">✅ Calidad Triple A garantizada</div>
+          <div class="envio-item">💬 Atencion inmediata por WhatsApp</div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .producto {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  .producto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  /* FOTOS */
+  .foto-principal {
+    aspect-ratio: 1/1;
+    background: #111;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .foto-principal img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s;
+  }
+
+  .miniaturas {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+  }
+
+  .miniatura {
+    aspect-ratio: 1/1;
+    background: #111;
+    border: 2px solid transparent;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 0;
+    transition: border-color 0.2s;
+  }
+
+  .miniatura img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .miniatura.activa {
+    border-color: var(--acento);
+  }
+
+  /* INFO */
+  .producto-marca {
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    color: var(--acento);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  .producto-nombre {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 4rem;
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .producto-precio {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    color: var(--blanco);
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+  }
+
+  .producto-color {
+    margin-bottom: 1.5rem;
+  }
+
+  .label {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gris);
+    margin-bottom: 0.7rem;
+  }
+
+  .label span {
+    color: var(--blanco);
+  }
+
+  /* SELECTORES */
+  .selector-grupo {
+    margin-bottom: 1.5rem;
+  }
+
+  .selector-btns {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .selector-btn {
+    background: transparent;
+    color: var(--gris);
+    border: 1px solid var(--borde);
+    padding: 0.6rem 1.5rem;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .selector-btn.activo {
+    background: var(--blanco);
+    color: var(--negro);
+    border-color: var(--blanco);
+  }
+
+  /* TALLAS */
+  .tallas-grid {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .talla-btn {
+    background: transparent;
+    color: var(--blanco);
+    border: 1px solid var(--borde);
+    width: 52px;
+    height: 52px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .talla-btn:hover {
+    border-color: var(--blanco);
+  }
+
+  .talla-btn.activo {
+    background: var(--acento);
+    color: var(--negro);
+    border-color: var(--acento);
+    font-weight: 700;
+  }
+
+  /* WHATSAPP */
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    background: #25D366;
+    color: var(--negro);
+    padding: 1rem 2rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    width: 100%;
+    margin-bottom: 0.8rem;
+    transition: opacity 0.2s;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .btn-whatsapp.listo {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .btn-whatsapp.listo:hover {
+    opacity: 0.9;
+  }
+
+  .nota {
+    font-size: 0.72rem;
+    color: var(--gris);
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .nota.oculta { display: none; }
+
+  /* ENVIO */
+  .envio-info {
+    border-top: 1px solid var(--borde);
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .envio-item {
+    font-size: 0.8rem;
+    color: var(--gris);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .producto-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .miniaturas {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+</style>
+
+<script>
+  let generoActual = 'mujer';
+  let tallaActual = '';
+  let colorActual = 'Beige';
+
+  const tallasHombre = [37, 38, 39, 40, 41, 42];
+  const tallasMujer = [35, 36, 37, 38];
+
+  function cambiarColor(btn) {
+    // Quitar activa de todas las miniaturas
+    document.querySelectorAll('.miniatura').forEach(m => m.classList.remove('activa'));
+    btn.classList.add('activa');
+
+    // Cambiar foto principal
+    const imagen = btn.getAttribute('data-imagen');
+    const nombre = btn.getAttribute('data-color');
+    document.getElementById('fotoPrincipal').src = imagen;
+    document.getElementById('colorActual').textContent = nombre;
+    colorActual = nombre;
+    actualizarWhatsApp();
+  }
+
+  function cambiarGenero(genero, btn) {
+    generoActual = genero;
+    tallaActual = '';
+
+    // Actualizar botones de genero
+    document.querySelectorAll('.selector-btn').forEach(b => b.classList.remove('activo'));
+    btn.classList.add('activo');
+
+    // Actualizar tallas
+    const tallas = genero === 'hombre' ? tallasHombre : tallasMujer;
+    const grid = document.getElementById('tallasGrid');
+    grid.innerHTML = tallas.map(t => 
+      `<button class="talla-btn" onclick="elegirTalla(this)">${t}</button>`
+    ).join('');
+
+    actualizarWhatsApp();
+  }
+
+  function elegirTalla(btn) {
+    document.querySelectorAll('.talla-btn').forEach(b => b.classList.remove('activo'));
+    btn.classList.add('activo');
+    tallaActual = btn.textContent;
+    actualizarWhatsApp();
+  }
+
+  function actualizarWhatsApp() {
+    const btnWa = document.getElementById('btnWhatsapp');
+    const nota = document.querySelector('.nota');
+
+    if (tallaActual && generoActual) {
+      const mensaje = encodeURIComponent(
+        `Hola! Me interesa el modelo New Balance 9060 color ${colorActual}, talla ${tallaActual} para ${generoActual}. Esta disponible?`
+      );
+      btnWa.href = `https://wa.me/573023582779?text=${mensaje}`;
+      btnWa.classList.add('listo');
+      nota.classList.add('oculta');
+    } else {
+      btnWa.classList.remove('listo');
+      nota.classList.remove('oculta');
+    }
+  }
+
+  // Hacer funciones globales
+  window.cambiarColor = cambiarColor;
+  window.cambiarGenero = cambiarGenero;
+  window.elegirTalla = elegirTalla;
+</script>
