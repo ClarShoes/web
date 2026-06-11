@@ -6,12 +6,13 @@ interface Props {
   precio: string;
   categoria: string;
   badge?: string;
+  href?: string;
 }
 
-const { imagen, alt, nombre, precio, categoria, badge } = Astro.props;
+const { imagen, alt, nombre, precio, categoria, badge, href } = Astro.props;
 
 const mensaje = encodeURIComponent(`Hola! Me interesa el modelo ${nombre}, precio $${precio}. Esta disponible?`);
-const waLink = `https://wa.me/573023582779?text=${mensaje}`;
+const waLink = href || `https://wa.me/573023582779?text=${mensaje}`;
 ---
 
 <div class="card">
