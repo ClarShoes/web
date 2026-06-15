@@ -4,9 +4,6 @@ import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import ProductCard from '../components/ProductCard.astro';
 
-// AQUI AGREGAS TUS PRODUCTOS
-// Para agregar uno nuevo, copia un bloque { } y pegalo al final antes del ];
-// Recuerda subir la foto a public/images/ con el mismo nombre exacto
 const productos = [
   { imagen: "/images/NEW-BALANCE-9060-X1.avif", alt: "New Balance 9060", nombre: "New Balance 9060", precio: "XXX.000", categoria: "", href: "/productos/new-balance-9060" },
   { imagen: "/images/Nike_Air_Max_BW.avif", alt: "Nike Air Max BW", nombre: "Nike Air Max BW", precio: "XXX.000", categoria: "", badge: "NUEVO" },
@@ -29,7 +26,6 @@ const categorias = ["Todos", "Hombre", "Mujer", "Nino", "Unisex"];
       <p class="catalogo-sub">{productos.length} modelos disponibles</p>
     </div>
 
-    <!-- FILTROS -->
     <div class="filtros">
       {categorias.map(cat => (
         <button class={`filtro-btn ${cat === 'Todos' ? 'activo' : ''}`} data-cat={cat}>
@@ -38,7 +34,6 @@ const categorias = ["Todos", "Hombre", "Mujer", "Nino", "Unisex"];
       ))}
     </div>
 
-    <!-- GRID DE PRODUCTOS -->
     <div class="productos-grid" id="productosGrid">
       {productos.map(p => (
         <div class="producto-wrapper" data-categoria={p.categoria}>
@@ -49,6 +44,7 @@ const categorias = ["Todos", "Hombre", "Mujer", "Nino", "Unisex"];
             precio={p.precio}
             categoria={p.categoria}
             badge={p.badge}
+            href={p.href}
           />
         </div>
       ))}
@@ -131,13 +127,11 @@ const categorias = ["Todos", "Hombre", "Mujer", "Nino", "Unisex"];
 </style>
 
 <script>
-  // Logica de filtros - esto hace que los botones funcionen
   const btns = document.querySelectorAll('.filtro-btn');
   const productos = document.querySelectorAll('.producto-wrapper');
 
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Quitar activo de todos
       btns.forEach(b => b.classList.remove('activo'));
       btn.classList.add('activo');
 
@@ -153,4 +147,3 @@ const categorias = ["Todos", "Hombre", "Mujer", "Nino", "Unisex"];
     });
   });
 </script>
-
